@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LiveType jQuery Plugin :: by Tobal San</title>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            font-family: 'Droid Sans', Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            width: 960px;
+            background-color: #fff;
+        }
+        .example {
+            font-size: 1.8em;
+            height: 704px;
+        }
+        p.signature {
+            text-align: right;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="example">
+            <p>Hello my friends !</p>
+
+            <p>
+                How are you today ? <br>
+                Here is a simple example of my <strong>LiveType plugin</strong>. <br>
+                If you want to give the impression that someone is typing live on your visitor screen, this is the plugin you are looking for.
+            </p>
+
+            <p>
+                Besides, it is very customizable. You can edit things like the typing speed, which type of cursor you want, its blinking speed, on which characters should the auto-typing make a pause, etc&hellip;
+                Also, you can use it on any general content html element (div, p).
+            </p>
+
+            <p>
+                Finally, although it is best used with pure text, you're not limited to text content. You can actually have HTML markup inside your container, and have it loaded "as-it-is-typed".
+                Like this : <img src="images/albert.jpg" alt="Albert !">
+            </p>
+
+            <p>Enjoy !</p>
+
+            <p class="signature">
+                Sincerely yours,<br>
+                <strong>Tobal San</strong>
+            </p>
+
+        </div>
+
+        <ul>
+            <li><a href="http://tobalsan.github.com/livetype/" title="">Go back to project page</a></li>
+            <li><a href="https://github.com/tobalsan/livetype/">Go to github repository</a></li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="javascripts/jquery.liveType.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.example').liveType({
+                typeSpeed: 50
+            });
+        })
+    </script>
+</body>
+</html>
