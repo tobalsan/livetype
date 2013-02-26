@@ -60,6 +60,11 @@ cursorSpeed        : 500,                               // Cursor blinking speed
 cursor             : '|'                                // Cursor type
 ```
 
+TODO
+----
+
+Add randomizer (scramble function then backspace erase and retyping on the last word) to add even more realism.
+
 LICENSE
 -------
 
