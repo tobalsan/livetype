@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="jQuery LiveType : jQuery LiveType plugin. A lightweight jQuery plugin to simulate live typing on the screen (also known as the typewriter effect)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>jQuery LiveType</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/tobalsan/livetype">View on GitHub</a>
+
+          <h1 id="project_title">jQuery LiveType</h1>
+          <h2 id="project_tagline">jQuery LiveType plugin. A lightweight jQuery plugin to simulate live typing on the screen (also known as the typewriter effect)</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/tobalsan/livetype/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/tobalsan/livetype/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>jQuery LiveType plugin</h1>
+
+<p>This is a jQuery plugin to provide the "typewriter" effect. More precisely, it makes content on your website look like it's being typed right at the moment the visitor is looking to the page.</p>
+
+<h2>Usage</h2>
+
+<p>Usage is pretty straightforward. Either <a href="https://github.com/tobalsan/livetype/archive/master.zip">download the files</a> or <a href="https://github.com/tobalsan/livetype">Clone the repository on github</a> to your project folder.</p>
+
+<p>Write the content that you want to have typed live in a <code>div</code> or a <code>p</code> and include jQuery and this plugin js files in your html document:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"example"</span><span class="nt">&gt;</span>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Possimus error fuga ad voluptate quibusdam.
+        Deserunt minus reiciendis maiores accusantium in error voluptatem eos
+        quibusdam harum nobis dolor alias quasi modi?
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/jquery.liveType.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">'.example'</span><span class="p">).</span><span class="nx">liveType</span><span class="p">({</span>
+                <span class="nx">typeSpeed</span><span class="o">:</span> <span class="mi">50</span>
+            <span class="p">});</span>
+        <span class="p">})</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</pre></div>
+
+<p>No CSS required: you style things as you please.</p>
+
+<h2>Options</h2>
+
+<p>There are several options to customize the plugin. Use it like so:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'.example'</span><span class="p">).</span><span class="nx">liveType</span><span class="p">({</span>
+        <span class="c1">// options</span>
+    <span class="p">});</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>Here are all the options, with their default values:</p>
+
+<div class="highlight"><pre><span class="nx">typeSpeed</span>          <span class="o">:</span> <span class="mi">50</span><span class="p">,</span>                                <span class="c1">// Time between each character typed</span>
+<span class="nx">pauseEvery</span>         <span class="o">:</span> <span class="mi">40</span><span class="p">,</span>                                <span class="c1">// Number of characters between each pause. Only used if pauseOnPunctuation is set to false</span>
+<span class="nx">pauseTime</span>          <span class="o">:</span> <span class="mi">1500</span><span class="p">,</span>                              <span class="c1">// The duration of pause</span>
+<span class="nx">pauseOnPunctuation</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>                              <span class="c1">// If the pause should be on punctuation characters</span>
+<span class="nx">punctuationChars</span>   <span class="o">:</span> <span class="p">[</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">,</span> <span class="s1">'?'</span><span class="p">,</span> <span class="s1">'!'</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="s1">';'</span><span class="p">],</span>    <span class="c1">// An array of characters to pause on</span>
+<span class="nx">cursorEffect</span>       <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>                              <span class="c1">// "True" for smooth blinking, "false" for plain blinking</span>
+<span class="nx">cursorSpeed</span>        <span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                               <span class="c1">// Cursor blinking speed</span>
+<span class="nx">cursor</span>             <span class="o">:</span> <span class="s1">'|'</span>                                <span class="c1">// Cursor type</span>
+</pre></div>
+
+<h2>LICENSE</h2>
+
+<p>This plugin is licenced under the MIT license</p>
+
+<h2>Contact &amp; infos</h2>
+
+<p>For any questions or comment feel free to contact me at tobalsan (a) gmail.com</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">jQuery LiveType maintained by <a href="https://github.com/tobalsan">tobalsan</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
