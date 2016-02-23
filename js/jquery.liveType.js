@@ -1,5 +1,5 @@
 /*!
- * jQuery LiveType 0.1
+ * jQuery LiveType 0.2.pre
  *
  * Copyright 2013, Tobal San (http://www.smartrock.fr)
  * Licensed under the MIT license.
@@ -16,34 +16,34 @@ $.fn.liveType = function(opts){
             punctuationChars   : ['.', '.', '?', '!', ':', ';'],    // An array of characters to pause on
             cursorEffect       : true,                              // "True" for smooth blinking, "false" for plain blinking
             cursorSpeed        : 500,                               // Cursor blinking speed
-            cursor             : '|'                                // Cursor type
+            cursor             : '|',                               // Cursor type
+            cursorClass        : 'cursor'                           // The classname for the cursor element
         },
-        settings = $.extend(defaults, opts);
+        settings = $.extend(defaults, opts),
 
-    text = $this.html();
-    $this.empty().append('<span class="cursor">' + settings.cursor + '</span>');
+        text = $this.html(),
+        cursor = 0,
+        t = setTimeout(type, settings.typeSpeed);
 
-    cursor = 0
+    $this.empty().append('<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
 
     setInterval(cursorAnimation, settings.cursorSpeed);
-    t = setTimeout(type, settings.typeSpeed);
 
     function cursorAnimation() {
         if (settings.cursorEffect) {
-            $("span.cursor", $this).animate({
+            $(settings.cursorClass, $this).animate({
               opacity: 0
             }, "fast", 'swing').animate({
               opacity: 1
             }, "fast", 'swing');
         } else {
-            if ($('span.cursor', $this).is(':visible')) {
-                $('span.cursor', $this).hide();
+            if ($(settings.cursorClass, $this).is(':visible')) {
+                $(settings.cursorClass, $this).hide();
             } else {
-                $('span.cursor', $this).show();
+                $(settings.cursorClass, $this).show();
             }
         }
     }
-
 
     function type() {
         cursor++;
@@ -52,21 +52,21 @@ $.fn.liveType = function(opts){
                 if(settings.punctuationChars.indexOf(text.substr(cursor-2, 1)) > -1) {
                     clearTimeout(t);
                     cursor++;
-                    setTimeout(type, settings.pauseTime);
+                    t = setTimeout(type, settings.pauseTime);
                 } else {
-                    $this.html(text.substr(0, cursor) + '<span class="cursor">' + settings.cursor + '</span>');
-                    setTimeout(type, settings.typeSpeed)
+                    $this.html(text.substr(0, cursor) + '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
+                    t = setTimeout(type, settings.typeSpeed);
                 }
             } else {
                 if(cursor % settings.pauseEvery) {
-                    $this.html(text.substr(0, cursor) + '<span class="cursor">' + settings.cursor + '</span>');
-                    setTimeout(type, settings.typeSpeed)
+                    $this.html(text.substr(0, cursor) + '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
+                    t = setTimeout(type, settings.typeSpeed);
                 } else {
                     clearTimeout(t);
                     cursor++;
-                    setTimeout(type, settings.pauseTime);
+                    t = setTimeout(type, settings.pauseTime);
                 }
             }
         }
     }
-}
+};

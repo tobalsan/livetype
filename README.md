@@ -51,13 +51,14 @@ Here are all the options, with their default values:
 
 ```js
 typeSpeed          : 50,                                // Time between each character typed
-pauseEvery         : 40,                                // Number of characters between each pause. Only used if pauseOnPunctuation is set to false
+pauseEvery         : 40,                                // Number of characters between each pause. Only used when pauseOnPunctuation is set to false
 pauseTime          : 1500,                              // The duration of pause
 pauseOnPunctuation : true,                              // If the pause should be on punctuation characters
 punctuationChars   : ['.', '.', '?', '!', ':', ';'],    // An array of characters to pause on
 cursorEffect       : true,                              // "True" for smooth blinking, "false" for plain blinking
 cursorSpeed        : 500,                               // Cursor blinking speed
-cursor             : '|'                                // Cursor type
+cursor             : '|',                               // Cursor type
+cursorClass        : 'cursor'                           // The classname for the cursor element
 ```
 
 TODO
