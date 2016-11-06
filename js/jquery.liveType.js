@@ -26,6 +26,7 @@ $.fn.liveType = function(opts){
 
         typingTimeout,
 
+
         startTyping = function () {
             typingTimeout = setTimeout(typing, settings.typeSpeed);
         },
@@ -36,11 +37,16 @@ $.fn.liveType = function(opts){
 
         pauseTyping = function () {
             typingTimeout = setTimeout(typing, settings.pauseTime);
+        }
+
+
+        cursorTemplate = function() {
+            return '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>';
         };
 
     startTyping();
 
-    $this.empty().append('<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
+    $this.empty().append(cursorTemplate());
 
     setInterval(cursorAnimation, settings.cursorSpeed);
 
@@ -69,12 +75,12 @@ $.fn.liveType = function(opts){
                     cursor++;
                     pauseTyping();
                 } else {
-                    $this.html(text.substr(0, cursor) + '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
+                    $this.html(text.substr(0, cursor) + cursorTemplate());
                     startTyping();
                 }
             } else {
                 if(cursor % settings.pauseEvery) {
-                    $this.html(text.substr(0, cursor) + '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
+                    $this.html(text.substr(0, cursor) + cursorTemplate());
                     startTyping();
                 } else {
                     stopTyping();
