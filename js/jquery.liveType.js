@@ -23,7 +23,22 @@ $.fn.liveType = function(opts){
 
         text = $this.html(),
         cursor = 0,
-        t = setTimeout(type, settings.typeSpeed);
+
+        typingTimeout,
+
+        startTyping = function () {
+            typingTimeout = setTimeout(typing, settings.typeSpeed);
+        },
+
+        stopTyping = function () {
+            clearTimeout(typingTimeout);
+        },
+
+        pauseTyping = function () {
+            typingTimeout = setTimeout(typing, settings.pauseTime);
+        };
+
+    startTyping();
 
     $this.empty().append('<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
 
@@ -45,26 +60,26 @@ $.fn.liveType = function(opts){
         }
     }
 
-    function type() {
+    function typing() {
         cursor++;
         if(cursor <= text.length) {
             if (settings.pauseOnPunctuation) {
                 if(settings.punctuationChars.indexOf(text.substr(cursor-2, 1)) > -1) {
-                    clearTimeout(t);
+                    stopTyping();
                     cursor++;
-                    t = setTimeout(type, settings.pauseTime);
+                    pauseTyping();
                 } else {
                     $this.html(text.substr(0, cursor) + '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
-                    t = setTimeout(type, settings.typeSpeed);
+                    startTyping();
                 }
             } else {
                 if(cursor % settings.pauseEvery) {
                     $this.html(text.substr(0, cursor) + '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>');
-                    t = setTimeout(type, settings.typeSpeed);
+                    startTyping();
                 } else {
-                    clearTimeout(t);
+                    stopTyping();
                     cursor++;
-                    t = setTimeout(type, settings.pauseTime);
+                    pauseTyping();
                 }
             }
         }
