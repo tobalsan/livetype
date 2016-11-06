@@ -27,6 +27,30 @@ $.fn.liveType = function(opts){
         typingTimeout,
 
 
+        cursorTemplate = function() {
+            return '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>';
+        },
+
+
+        animateCursor = function () {
+            setInterval(function () {
+                if (settings.cursorEffect) {
+                    $('.' + settings.cursorClass, $this).animate({
+                      opacity: 0
+                    }, "fast", 'swing').animate({
+                      opacity: 1
+                    }, "fast", 'swing');
+                } else {
+                    if ($('.' + settings.cursorClass, $this).is(':visible')) {
+                        $('.' + settings.cursorClass, $this).hide();
+                    } else {
+                        $('.' + settings.cursorClass, $this).show();
+                    }
+                }
+            }, settings.cursorSpeed);
+        },
+
+
         startTyping = function () {
             typingTimeout = setTimeout(typing, settings.typeSpeed);
         },
@@ -39,59 +63,35 @@ $.fn.liveType = function(opts){
             stopTyping();
             cursor += 1;
             typingTimeout = setTimeout(typing, settings.pauseTime);
-        }
-
-
-        cursorTemplate = function() {
-            return '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>';
-        }
+        },
 
 
         onPunctuationChar = function () {
             return settings.punctuationChars.indexOf(text.substr(cursor - 2, 1)) > -1
-        }
-        ;
+        },
 
-    startTyping();
+        typing = function () {
+            cursor += 1;
+            if (cursor <= text.length) {
+                if (settings.pauseOnPunctuation) {
+                    if (onPunctuationChar()) {
+                        pauseTyping();
+                    } else {
+                        $this.html(text.substr(0, cursor) + cursorTemplate());
+                        startTyping();
+                    }
+                } else {
+                    if(cursor % settings.pauseEvery) {
+                        $this.html(text.substr(0, cursor) + cursorTemplate());
+                        startTyping();
+                    } else {
+                        pauseTyping();
+                    }
+                }
+            }
+        };
 
     $this.empty().append(cursorTemplate());
-
-    setInterval(cursorAnimation, settings.cursorSpeed);
-
-    function cursorAnimation() {
-        if (settings.cursorEffect) {
-            $(settings.cursorClass, $this).animate({
-              opacity: 0
-            }, "fast", 'swing').animate({
-              opacity: 1
-            }, "fast", 'swing');
-        } else {
-            if ($(settings.cursorClass, $this).is(':visible')) {
-                $(settings.cursorClass, $this).hide();
-            } else {
-                $(settings.cursorClass, $this).show();
-            }
-        }
-    }
-
-    function typing() {
-        cursor += 1;
-        if(cursor <= text.length) {
-            if (settings.pauseOnPunctuation) {
-                if (onPunctuationChar()) {
-                    pauseTyping();
-                } else {
-                    $this.html(text.substr(0, cursor) + cursorTemplate());
-                    startTyping();
-                }
-            } else {
-                if(cursor % settings.pauseEvery) {
-                    $this.html(text.substr(0, cursor) + cursorTemplate());
-                    startTyping();
-                } else {
-                    pauseTyping();
-                }
-            }
-        }
-    }
+    animateCursor();
+    startTyping();
 };
