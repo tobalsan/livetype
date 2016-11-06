@@ -36,6 +36,8 @@ $.fn.liveType = function(opts){
         },
 
         pauseTyping = function () {
+            stopTyping();
+            cursor += 1;
             typingTimeout = setTimeout(typing, settings.pauseTime);
         }
 
@@ -67,12 +69,10 @@ $.fn.liveType = function(opts){
     }
 
     function typing() {
-        cursor++;
+        cursor += 1;
         if(cursor <= text.length) {
             if (settings.pauseOnPunctuation) {
                 if(settings.punctuationChars.indexOf(text.substr(cursor-2, 1)) > -1) {
-                    stopTyping();
-                    cursor++;
                     pauseTyping();
                 } else {
                     $this.html(text.substr(0, cursor) + cursorTemplate());
@@ -83,8 +83,6 @@ $.fn.liveType = function(opts){
                     $this.html(text.substr(0, cursor) + cursorTemplate());
                     startTyping();
                 } else {
-                    stopTyping();
-                    cursor++;
                     pauseTyping();
                 }
             }
