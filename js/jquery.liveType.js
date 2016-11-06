@@ -44,7 +44,13 @@ $.fn.liveType = function(opts){
 
         cursorTemplate = function() {
             return '<span class="' + settings.cursorClass + '">' + settings.cursor + '</span>';
-        };
+        }
+
+
+        onPunctuationChar = function () {
+            return settings.punctuationChars.indexOf(text.substr(cursor - 2, 1)) > -1
+        }
+        ;
 
     startTyping();
 
@@ -72,7 +78,7 @@ $.fn.liveType = function(opts){
         cursor += 1;
         if(cursor <= text.length) {
             if (settings.pauseOnPunctuation) {
-                if(settings.punctuationChars.indexOf(text.substr(cursor-2, 1)) > -1) {
+                if (onPunctuationChar()) {
                     pauseTyping();
                 } else {
                     $this.html(text.substr(0, cursor) + cursorTemplate());
