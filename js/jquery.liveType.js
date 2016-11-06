@@ -70,8 +70,10 @@ $.fn.liveType = function(opts){
             return settings.punctuationChars.indexOf(text.substr(cursor - 2, 1)) > -1
         },
 
+
         typing = function () {
             cursor += 1;
+
             if (cursor <= text.length) {
                 if (settings.pauseOnPunctuation) {
                     if (onPunctuationChar()) {
@@ -89,9 +91,17 @@ $.fn.liveType = function(opts){
                     }
                 }
             }
+        },
+
+
+        init = function () {
+            $this.empty();
+            $this.append(cursorTemplate());
+
+            animateCursor();
+
+            startTyping();
         };
 
-    $this.empty().append(cursorTemplate());
-    animateCursor();
-    startTyping();
+    init();
 };
